@@ -1,7 +1,6 @@
-const monggose = require('mongoose')
-const {IdeaSchema} = require('../Schema')
+const mongoose = require('mongoose')
+const { IdeaSchema } = require('../Schema')
 
-
-const Idea = mongoose.model('Idea', Ideaschema)
+const Idea = mongoose.model('Idea', IdeaSchema)
 
 module.exports = Idea

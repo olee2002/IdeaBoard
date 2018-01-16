@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static(__dirname + '/client/build/'))
 mongoose.connect(process.env.MONGODB_URI, {
     useMongoClient: true
-}) 
+})
 
 const connection = mongoose.connection;
 connection.on('connected', () => {
@@ -21,10 +21,13 @@ connection.on('error', (err) => {
 app.use(bodyParser.json());
 
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/client/build/index.html')
-  })
+})
 
+const ideasController = require('./controllers/IdeasController')
+app.use('/ideas', ideasController)
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log("Magic happening on port " + PORT)})
+    console.log("Magic happening on port " + PORT)
+})
