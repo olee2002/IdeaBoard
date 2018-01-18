@@ -1,15 +1,16 @@
-
 {
   "name": "IdeaBoard",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
-    "mongoose": "^4.13.9"
+    "mongoose": "^4.13.9",
+    "styled-components": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
