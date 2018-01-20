@@ -26,7 +26,7 @@ app.get('/', (req,res) => {
   })
 
 const users = require('./controllers/UsersController')
-app.use('api/users',users)
+app.use('/api/users',users)
 
 // const ideasController = require('./controllers/IdeasController')
 // app.use('/ideas', ideasController)
