@@ -8,18 +8,20 @@ class IdeasList extends Components{
     }
 
    async componentWillMount(){
-        const response  = await axios.get('/ideas')
-
-        this.setState({ideas: response.data})
+        const res  = await axios.get('http://localhost:3001/api/ideas')
+       
+        this.setState({ideas: res.data})
     }
 
 render(){
 
     return( 
     <div> 
-        <p>{this.state.ideas.map((idea)=>{
+        <p>
+        {this.state.ideas.map((idea)=>{
             return idea.title
-        })}</p>
+        })}
+        </p>
         
         </div>
 )}

@@ -11,21 +11,20 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
-    try {
-        const newIdea = await Idea.create({})
-        res.json(newIdea)
-    } catch (error) {
-        console.log(error)
-    }
-})
-router.patch('/:id', (res, req) => {
-    const ideaId = req.params.id
-    Idea.findByIdAndUpdate(ideaId, req.body)
-        .then((updatedIdea) => {
-            res.json(updatedIdea)
-        })
-})
+// router.post('/', async (req, res) => {
+//     try {
+//         const newIdea = await Idea.create({})
+//         res.json(newIdea)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })
+// router.patch('/:id', (res, req) => {
+//     const ideaId = req.params.id
+//     Idea.findByIdAndUpdate(ideaId, req.body)
+//         .then((updatedIdea) => {
+//             res.json(updatedIdea)
+//         })
+// })
 
 
-module.exports = router

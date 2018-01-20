@@ -1,25 +1,28 @@
 require('dotenv').config()
-
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGODB_URI, {
     useMongoClient: true
 })
 
 const Idea = require('./models/Idea')
+const User = require('./models/User')
 
 const mars = new Idea({
     title: 'Fly to Mars',
-    content: "Earth isn't Red enough. Let's move to a new planet"
+    description: "Earth isn't Red enough. Let's move to a new planet"
 })
 
 const tesla = new Idea({
     title: 'Build a Car',
-    content: "Gas is too expensive. I'm gonna build a car that doesn't need gas"
+   description: "Gas is too expensive. I'm gonna build a car that doesn't need gas"
 })
 
-Idea.remove({})
-    .then(() => mars.save())
-    .then(() => tesla.save())
-    .then(() => console.log('Data-Successful Save!!!'))
+const elon = new User({
+    userName: 'elon_musk',
+    password: 'spaceiscook',
+    ideas:[mars,tesla]
+})
+User.remove({})
+    .then(() => elon.save())
+    .then(() => console.log('User-Successful Save!!!'))
     .then(() => mongoose.connection.close())

@@ -7,7 +7,7 @@ const IdeaSchema = new Schema(
             type: String,
             required: false
         },
-        content: {
+        description: {
             type: String,
             required: false
         }
@@ -16,7 +16,22 @@ const IdeaSchema = new Schema(
         timestamps: {}
     }
 )
-
+const UserSchema = new Schema(
+    {
+        userName: {
+            type: String,
+            required: false
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        ideas:[IdeaSchema]
+    },
+    {
+        timestamps: {}
+    }
+)
 module.exports = {
-    IdeaSchema
+    IdeaSchema, UserSchema
 }

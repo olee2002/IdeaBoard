@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 class IdeaPage extends Component {
     state = {
@@ -31,8 +31,9 @@ class IdeaPage extends Component {
     }
 
     createIdea = async () => {
-        const response = await axios.post(`/api/ideas`)
-        const newIdea = response.data
+        const res = await axios.post(`/api/ideas`)
+        console.log(res)
+        const newIdea = res.data
         
         const newIdeas = [...this.state.ideas]
         newIdeas.unshift(newIdea) //This will add the new Idea to the beginning of the array
