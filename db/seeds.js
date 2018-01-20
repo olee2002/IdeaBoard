@@ -21,5 +21,5 @@ const tesla = new Idea({
 Idea.remove({})
     .then(() => mars.save())
     .then(() => tesla.save())
-    .then(() => console.log('Successful Save!!!'))
+    .then(() => console.log('Data-Successful Save!!!'))
     .then(() => mongoose.connection.close())
