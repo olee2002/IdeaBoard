@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect, Link } from 'react-router-dom'
-import Axios from 'axios'
+import axios from 'axios'
 
 class Login extends Component {
 
@@ -9,16 +9,36 @@ class Login extends Component {
     }
 
     getAllUsers = () => {
-        Axios.get('http://localhost:3001/api/users')
+
+        axios.get('/api/users')
             .then(res => {
                 console.log(res.data)
                 this.setState({ users: res.data })
-            }).catch((err) => {
-                console.log(err)
             })
-
+        console.log(this.state.users)
     }
 
+    createUser = () => {
+        axios.post('/api/users', {
+            user: this.state.user
+        }).then((res) => {
+            this.setState({
+                redirectToHome: true,
+                createdUser: res.data
+            })
+        })
+    }
+
+    handleChange = (event) => {
+        const user = { ...this.state.user }
+        user[event.target.name] = event.target.value
+        this.setState({ user })
+    }
+
+    handleSignUp = (event) => {
+        event.preventDefault()
+        this.createUser()
+    }
 
     render() {
         console.log(this.state.users)
@@ -31,9 +51,24 @@ class Login extends Component {
                         {user.userName}
                     </Link>)
                 })}
-            </div>
-        )
+                
+                <h1>Sign-Up</h1>
+                <form onSubmit={this.handleSignUp}>
+                    <div>
+                        <label htmlFor="userName">User Name</label>
+                        <input onChange={this.handleChange} name="userName" type="text" value={this.state.userName} />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input onChange={this.handleChange} name="password" type="text" value={this.state.password} />
+                    </div>
+                    <button> Sign Up </button>
+                </form>
+                </div>
+                
+                    )
     }
 }
+
 
 export default Login
