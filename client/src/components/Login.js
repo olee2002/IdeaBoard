@@ -18,27 +18,17 @@ class Login extends Component {
                 console.log(res.data)
                 this.setState({ users: res.data })
             })
-        console.log(this.state.users)
+
     }
     createUser = () => {
-        axios.get('/api/users')
-        .then((res) => {
-            const newUser = res.data
-            const newUsers = [...this.state.users]
-            newUsers.push(newUser)
-            this.setState({ redirectToHome: true, createdUser: res.data })
-        }).catch()
+        axios.post('/api/users',{
+            user: this.state.user
+        }).then((res) => {
+            this.setState({createdUser: res.data })
+        })
     }
-    // createUser = () => {
-    //     axios.post('/api/users', {
-    //         user: this.state.user
-    //     }).then((res) => {
-    //         this.setState({ redirectToHome: true, createdUser: res.data })
-    //     }).catch()
-    // }
-
     handleChange = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         const user = { ...this.state.user }
         user[e.target.name] = e.target.value
         this.setState({ user })
@@ -46,14 +36,14 @@ class Login extends Component {
 
     handleSignUp = (e) => {
         e.preventDefault()
-      
+
         this.createUser()
     }
 
-   
+
 
     render() {
-        console.log(this.state.users)
+        // console.log(this.state.users)
         return (
             <div>
                 <Link to={`/`}>BackToHome</Link>
@@ -62,10 +52,10 @@ class Login extends Component {
                 {this.state.users.map(user => {
                     return (
                         <div>
-                    <Link to={`/user/${user._id}`} key={user._id}>
-                        <div>User: {user.userName}</div>
-                    </Link>
-                    </div>
+                            <Link to={`/user/${user._id}`} key={user._id}>
+                                <div>User: {user.userName}</div>
+                            </Link>
+                        </div>
                     )
                 })}
 
@@ -73,7 +63,7 @@ class Login extends Component {
                 <form onSubmit={this.handleSignUp}>
                     <div>
                         <label htmlFor="userName">User Name</label>
-                        
+
                         <input onChange={this.handleChange} name="userName" type="text" value={this.state.userName} />
                     </div>
                     <div>

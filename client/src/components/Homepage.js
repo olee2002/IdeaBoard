@@ -9,7 +9,7 @@ class Homepage extends Component {
         return(
             <div>
                 <h1>Hello! Welcome to the page!</h1>
-                {/* <Link to = '/login'>LogIn </Link > */}
+                <Link to = '/login'>LogIn </Link >
                 </div>
         )
     }

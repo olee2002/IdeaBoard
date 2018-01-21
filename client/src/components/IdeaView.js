@@ -49,27 +49,43 @@ class IdeaView extends Component {
     createIdea = () => {
         console.log(this.state.ideas)
         console.log(this.state.user)
-      
+
         axios.get(`/api/users/${this.state.user._id}/ideas`)
             .then(res => {
                 const newIdeas = [...this.state.ideas]
                 newIdeas.push(res.data.ideas) //This will add the new Idea to the beginning of the array
                 this.setState({ ideas: newIdeas })
             }).catch(console.log)
-            console.log(this.state.ideas)
+        console.log(this.state.ideas)
     }
     deleteIdea = (idea) => {
-       
+
         axios.get(`/api/users/${this.state.user._id}/ideas/`)
             .then(res => {
                 const indexToDelete = res.data.indexOf(idea)
                 const newIdeas = [...this.state.ideas]
-                newIdeas.splice(indexToDelete,1) //This will add the new Idea to the beginning of the array
-                this.setState({ ideas:  newIdeas })
+                newIdeas.splice(indexToDelete, 1) //This will add the new Idea to the beginning of the array
+                this.setState({ ideas: newIdeas })
             }).catch(console.log)
     }
+    updateIdea = (idea, e) => {
+        axios.patch(`/api/users/${this.state.user.id}/ideas/${idea._id}`, { idea }).then(res => {
+            this.setState({ ideas: res.data.ideas })
+        })
+    }
+    handleChange = (idea, event) => {
+        const newIdeas = [...this.state.ideas]
+        const ideas = newIdeas.map((savedIdea) => {
+            if (savedIdea._id === idea._id) {
+                savedIdea[event.target.name] = event.target.value
+            }
+            return savedIdea
+        })
+        this.setState({ ideas: ideas })
+    }
+
     render() {
-        
+
         return (
             <div>
                 <div>
@@ -80,7 +96,12 @@ class IdeaView extends Component {
                     {this.state.ideas.map(idea => {
                         return (
                             <div key={this.state.user.id}>
-                                <input type='text' name='title' />
+                                <input
+                                    type='text'
+                                    name='title'
+                                    onChange={(e) => this.handleChange(idea, e)}
+                                    value={this.state.ideas.title}
+                                />
                                 <textarea name='description' />
                                 <button onClick={this.deleteIdea}>Delete Idea</button>
                             </div>
