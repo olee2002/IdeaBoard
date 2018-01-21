@@ -40,6 +40,11 @@ class Login extends Component {
         this.createUser()
     }
 
+    componentWillMount () {
+        this.getAllUsers()
+       
+      }
+
     render() {
         console.log(this.state.users)
         return (
