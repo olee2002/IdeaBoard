@@ -7,8 +7,9 @@ import {
   Link
 } from 'react-router-dom'
 import styled from 'styled-components'
-import IdeaPage from './components/IdeaPage'
-
+import Ideapage from './components/IdeaPage'
+import Homepage from './components/Homepage'
+import Login from './components/Login'
 
 class App extends Component {
   render() {
@@ -20,9 +21,9 @@ class App extends Component {
           </div>
           <Switch>
             <div>
-              <Route exact path = "/" render = {HomePage}/>
-              <Route exact path = "/login" render= {LogInPage}/>
-              <Route exact path = "/user/:userId" render={IdeaPage}/>
+              <Route exact path = "/" component = {Homepage}/>
+              <Route exact path = "/login" component= {Login}/>
+              <Route exact path = "/user/:userId" component={Ideapage}/>
             </div>
           </Switch>
         </div>
