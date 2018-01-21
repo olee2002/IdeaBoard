@@ -17,7 +17,7 @@ class App extends Component {
       <Router>
         <div>
           <div>
-            <Link to='/login'>Login</Link>
+            {/* <Link to='/login'>Login</Link> */}
           </div>
           <Switch>
             <div>

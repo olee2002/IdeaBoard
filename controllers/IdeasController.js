@@ -11,20 +11,32 @@ router.get('/', async (req, res) => {
     }
 })
 
-// router.post('/', async (req, res) => {
-//     try {
-//         const newIdea = await Idea.create({})
-//         res.json(newIdea)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
-// router.patch('/:id', (res, req) => {
-//     const ideaId = req.params.id
-//     Idea.findByIdAndUpdate(ideaId, req.body)
-//         .then((updatedIdea) => {
-//             res.json(updatedIdea)
-//         })
-// })
+router.post('/', (req, res) => {
+    User.findById(req.params.userId).then((user) => {
+        const newIdea = new Idea({})
+        user.ideas.push(newIdea)
+        user.save().then((user) => {
+            res.json(newIdea)
+        })
+    })
+})
+
+router.get('/:ideaId/delete',(req,res)=>{
+    const userId = req.params.userId
+    const ideaId = req.params.ideaId
+
+    User.findById(userId)
+    .then((user)=>{
+        user.ideas.id(ideaId).remove()
+        return user.save()
+    })
+    .then(()=>{
+        res.redirect(`/users/${userId}/ideas/`)
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
+})
 
 
+module.exports = router

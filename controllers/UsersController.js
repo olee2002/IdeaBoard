@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
         .then((user) => {
             res.json(user)
         })
-        .catch((err) => { console.log(err) })
+        // .catch((err) => { console.log(err) })
 })
 
 router.get('/:id', (req, res) => {
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
                 res.json(user)
             )
         })
-        .catch((err) => console.log(err))
+        // .catch((err) => console.log(err))
 })
 
 

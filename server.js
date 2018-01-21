@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const app = express();
 app.use(express.static(__dirname + '/client/build/'))
@@ -20,7 +21,7 @@ connection.on('error', (err) => {
 });
 
 app.use(bodyParser.json());
-
+app.use(methodOverride('_method'))
 app.get('/', (req,res) => {
     res.sendFile(__dirname + '/client/build/index.html')
   })
@@ -28,8 +29,10 @@ app.get('/', (req,res) => {
 const users = require('./controllers/UsersController')
 app.use('/api/users',users)
 
-// const ideasController = require('./controllers/IdeasController')
-// app.use('/ideas', ideasController)
+const ideas = require('./controllers/IdeasController')
+app.use('/api/users/:userId/ideas', ideas)
+
+console.log('ideasController set up')
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log("Magic happening on port " + PORT)

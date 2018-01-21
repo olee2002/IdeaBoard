@@ -7,7 +7,10 @@ class Login extends Component {
     state = {
         users: []
     }
+    componentWillMount() {
+        this.getAllUsers()
 
+    }
     getAllUsers = () => {
 
         axios.get('/api/users')
@@ -17,33 +20,37 @@ class Login extends Component {
             })
         console.log(this.state.users)
     }
-
     createUser = () => {
-        axios.post('/api/users', {
-            user: this.state.user
-        }).then((res) => {
-            this.setState({
-                redirectToHome: true,
-                createdUser: res.data
-            })
-        })
+        axios.get('/api/users')
+        .then((res) => {
+            const newUser = res.data
+            const newUsers = [...this.state.users]
+            newUsers.push(newUser)
+            this.setState({ redirectToHome: true, createdUser: res.data })
+        }).catch()
     }
+    // createUser = () => {
+    //     axios.post('/api/users', {
+    //         user: this.state.user
+    //     }).then((res) => {
+    //         this.setState({ redirectToHome: true, createdUser: res.data })
+    //     }).catch()
+    // }
 
-    handleChange = (event) => {
+    handleChange = (e) => {
+        e.preventDefault()
         const user = { ...this.state.user }
-        user[event.target.name] = event.target.value
+        user[e.target.name] = e.target.value
         this.setState({ user })
     }
 
-    handleSignUp = (event) => {
-        event.preventDefault()
+    handleSignUp = (e) => {
+        e.preventDefault()
+      
         this.createUser()
     }
 
-    componentWillMount () {
-        this.getAllUsers()
-       
-      }
+   
 
     render() {
         console.log(this.state.users)
@@ -51,28 +58,33 @@ class Login extends Component {
             <div>
                 <Link to={`/`}>BackToHome</Link>
                 <h1>Log-In</h1>
-                <h3>Please Select and Existing User</h3>
+                <h4>Please Select and Existing User</h4>
                 {this.state.users.map(user => {
-                    return (<Link to={`/user/${user._id}`}>
-                        {user.userName}
-                    </Link>)
+                    return (
+                        <div>
+                    <Link to={`/user/${user._id}`} key={user._id}>
+                        <div>User: {user.userName}</div>
+                    </Link>
+                    </div>
+                    )
                 })}
-                
+
                 <h1>Sign-Up</h1>
                 <form onSubmit={this.handleSignUp}>
                     <div>
                         <label htmlFor="userName">User Name</label>
+                        
                         <input onChange={this.handleChange} name="userName" type="text" value={this.state.userName} />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
                         <input onChange={this.handleChange} name="password" type="text" value={this.state.password} />
                     </div>
-                    <button> Sign Up </button>
+                    <button>Sign Up</button>
                 </form>
-                </div>
-                
-                    )
+            </div>
+
+        )
     }
 }
 
