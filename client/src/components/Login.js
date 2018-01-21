@@ -49,6 +49,7 @@ class Login extends Component {
         console.log(this.state.users)
         return (
             <div>
+                <Link to={`/`}>BackToHome</Link>
                 <h1>Log-In</h1>
                 <h3>Please Select and Existing User</h3>
                 {this.state.users.map(user => {

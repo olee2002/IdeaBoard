@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Redirect} from 'react-router-dom'
+import {Redirect,Link} from 'react-router-dom'
 import Axios from 'axios'
 import Login from './Login'
 
@@ -8,8 +8,8 @@ class Homepage extends Component {
 
         return(
             <div>
-                Hello! Welcome to the page!
-                <Login />
+                <h1>Hello! Welcome to the page!</h1>
+                {/* <Link to = '/login'>LogIn </Link > */}
                 </div>
         )
     }
