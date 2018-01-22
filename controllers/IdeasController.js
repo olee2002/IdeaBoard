@@ -38,7 +38,7 @@ router.get('/:ideaId/delete',(req,res)=>{
     })
 })
 
-router.patch('/:id',(req,res)=>{
+router.patch('/:ideaId',(req,res)=>{
     User.findById(req,params.userId).then((user)=>{
         const update = req.body.idea
         const idea = user.ideas.id(req.params.id)

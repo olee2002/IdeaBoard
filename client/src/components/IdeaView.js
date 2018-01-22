@@ -17,14 +17,6 @@ class IdeaView extends Component {
             id: 2,
             title: 'hola',
             description: 'mundo'
-        }, {
-            id: 3,
-            title: 'goodnight',
-            description: 'moon'
-        }, {
-            id: 4,
-            title: 'greetings',
-            description: 'earthlings'
         }]
     }
 

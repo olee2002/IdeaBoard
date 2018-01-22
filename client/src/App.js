@@ -20,7 +20,7 @@ class App extends Component {
             <div>
               <Route exact path = "/" component = {Homepage}/>
               <Route exact path = "/login" component= {Login}/>
-              <Route exact path = "/users/:userId" component={IdeaView}/>
+              <Route exact path = "/user/:userId" component={IdeaView}/>
             </div>
           </Switch>
         </div>

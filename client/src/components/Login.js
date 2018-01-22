@@ -60,7 +60,7 @@ class Login extends Component {
 
         if (this.state.redirect) {
             console.log(this.state.users)
-            return (<Redirect to={`/users/${this.state.userId}`}  />)
+            return (<Redirect to={`/user/${this.state.userId}`}  />)
         }
         return (
             <div>
