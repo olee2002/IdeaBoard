@@ -18,7 +18,7 @@ const tesla = new Idea({
 })
 
 const elon = new User({
-    userName: 'elon_musk',
+    userName: 'Elon_Musk',
     password: 'spaceiscook',
     ideas:[mars,tesla]
 })

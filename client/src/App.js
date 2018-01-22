@@ -16,14 +16,11 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div>
-            {/* <Link to='/login'>Login</Link> */}
-          </div>
           <Switch>
             <div>
               <Route exact path = "/" component = {Homepage}/>
               <Route exact path = "/login" component= {Login}/>
-              <Route exact path = "/user/:userId" component={IdeaView}/>
+              <Route exact path = "/users/:userId" component={IdeaView}/>
             </div>
           </Switch>
         </div>

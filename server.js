@@ -30,7 +30,7 @@ const users = require('./controllers/UsersController')
 app.use('/api/users',users)
 
 const ideas = require('./controllers/IdeasController')
-app.use('/api/users/:userId/ideas', ideas)
+app.use('/api/users/:userId', ideas)
 
 console.log('ideasController set up')
 const PORT = process.env.PORT || 3001;

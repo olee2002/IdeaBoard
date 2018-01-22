@@ -31,7 +31,7 @@ router.get('/:ideaId/delete',(req,res)=>{
         return user.save()
     })
     .then(()=>{
-        res.redirect(`/users/${userId}/ideas/`)
+        res.redirect(`/users/${userId}`)
     })
     .catch((error)=>{
         console.log(error)

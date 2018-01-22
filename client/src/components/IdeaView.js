@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
 // import styled from 'styled-components'
 
@@ -56,7 +57,6 @@ class IdeaView extends Component {
                 newIdeas.push(res.data.ideas) //This will add the new Idea to the beginning of the array
                 this.setState({ ideas: newIdeas })
             }).catch(console.log)
-        console.log(this.state.ideas)
     }
     deleteIdea = (idea) => {
 
@@ -85,9 +85,13 @@ class IdeaView extends Component {
     }
 
     render() {
-
+        if (this.state.redirect) {
+            return (<Redirect to="/z" />)
+        }
         return (
             <div>
+                <Link to={`/`}>BackToHome</Link>
+                <Link to={`/login`}>BackToUsers</Link>
                 <div>
                     <h1>{this.state.user.userName}'s Idea Board</h1>
                     <button onClick={this.createIdea}>New Idea</button>
@@ -102,8 +106,9 @@ class IdeaView extends Component {
                                     onChange={(e) => this.handleChange(idea, e)}
                                     value={this.state.ideas.title}
                                 />
+                                <button onClick={this.deleteIdea}>X</button>
                                 <textarea name='description' />
-                                <button onClick={this.deleteIdea}>Delete Idea</button>
+
                             </div>
                         )
                     })}
